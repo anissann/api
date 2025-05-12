@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advice Generator</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #1f2632;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #323a49;
+      padding: 40px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+      color: #cee3e9;
+      position: relative;
+    }
+
+    .advice-id {
+      color: #52ffa8;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+
+    .advice-text {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #4e5d73;
+      margin: 20px 0;
+    }
+
+    .dice-btn {
+      background-color: #52ffa8;
+      border: none;
+      border-radius: 50%;
+      padding: 20px;
+      cursor: pointer;
+      position: absolute;
+      left: 160px;
+      bottom: -30px;
+    }
+
+    .dice-btn:hover {
+      box-shadow: 0 0 20px #52ffa8;
+    }
+
+    .dice-btn:active {
+      box-shadow: 0 0 20px #52ffa8;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="advice-id" id="advice-id">ADVICE #117</div>
+    <div class="advice-text" id="advice-text">"It is easy to sit up and take notice..."</div>
+    <div class="divider"></div>
+    <button class="dice-btn" onclick="getAdvice()">🎲</button>
+  </div>
+
+  <script>
+    async function getAdvice() {
+      const response = await fetch('https://api.adviceslip.com/advice');
+      const data = await response.json();
+      const advice = data.slip;
+
+      document.getElementById('advice-id').textContent = `ADVICE #${advice.id}`;
+      document.getElementById('advice-text').textContent = `"${advice.advice}"`;
+    }
+    getAdvice();
+  </script>
+
+</body>
+</html>
